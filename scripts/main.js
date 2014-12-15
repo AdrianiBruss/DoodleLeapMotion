@@ -1,4 +1,3 @@
-
 requirejs.config({
   paths: {
     'Leap': '../lib/leap-0.6.4'
@@ -10,8 +9,50 @@ requirejs.config({
   }
 });
 
-require(['Leap', 'canvas','utils', 'scene', 'perso'], function(Leap, canvas, utils, scene, perso) {
+require(['Leap','utils', 'scene', 'perso'], function(Leap, utils, scene, perso) {
   'use strict';
+
+
+    //test with mouse
+
+    var lastTime = 0;
+    var vendors = ['webkit', 'moz'];
+    for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
+        window.requestAnimationFrame = window[vendors[x]+'RequestAnimationFrame'];
+        window.cancelAnimationFrame =
+            window[vendors[x]+'CancelAnimationFrame'] || window[vendors[x]+'CancelRequestAnimationFrame'];
+    }
+
+    if (!window.requestAnimationFrame)
+        window.requestAnimationFrame = function(callback, element) {
+            var currTime = new Date().getTime();
+            var timeToCall = Math.max(0, 16 - (currTime - lastTime));
+            var id = window.setTimeout(function() { callback(currTime + timeToCall); },
+                timeToCall);
+            lastTime = currTime + timeToCall;
+            return id;
+        };
+
+    if (!window.cancelAnimationFrame)
+        window.cancelAnimationFrame = function(id) {
+            clearTimeout(id);
+        };
+
+    function anim(){
+        requestAnimationFrame(anim);
+        perso.update();
+    }
+
+    requestAnimationFrame(anim);
+
+
+    $('body').on('click', function(){
+        perso.updateSpeed((Math.random() * -10) - 5);
+        console.log('caca')
+    });
+
+
+
 
   var controller = new Leap.Controller({
     enableGestures: true,
@@ -60,10 +101,11 @@ require(['Leap', 'canvas','utils', 'scene', 'perso'], function(Leap, canvas, uti
             case "circle":
               //console.log("Circle Gesture");
               break;
-            case "keyTap":
+              case "keyTap":
               console.log("Key Tap Gesture");
 
-              perso.updateSpeed(3);
+                // Essayer de prendre en compte la puissance du tap
+                perso.updateSpeed((Math.random() * -10) - 5);
 
               break;
             case "screenTap":

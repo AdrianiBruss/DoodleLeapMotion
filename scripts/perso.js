@@ -12,16 +12,14 @@ define([], function(ctx) {
         },
         vitesse : {
             x:0,
-            y:0
+            y:(Math.random() * -10) - 5
         },
         position : {
-            x:100,
-            y:100
+            x: 500,
+            y: 999
         },
         screen : window,
         $el : $('#perso'),
-        acceleration : 0,
-
 
         init: function () {
 
@@ -35,19 +33,24 @@ define([], function(ctx) {
 
         },
 
-        updateSpeed : function(acceleration){
-            this.acceleration = acceleration;
+        updateSpeed : function(vitesse){
+            this.vitesse.y = vitesse;
         },
         update: function() {
 
-            this.vitesse.x = this.acceleration;
-            this.vitesse.y = this.acceleration;
+            this.position.x += this.vitesse.x;
+            this.position.y += this.vitesse.y;
 
-            this.vitesse.x += this.step.x;
             this.vitesse.y += this.step.y;
 
-            this.position.x -= this.vitesse.x;
-            this.position.y += this.vitesse.y;
+//            this.step.x = this.acceleration;
+            //this.step.y = this.acceleration;
+
+//            this.vitesse.x += this.step.x;
+            //this.vitesse.y += this.step.y;
+
+//            this.position.x -= this.vitesse.x;
+            //this.position.y = this.vitesse.y;
 
 
             //if (this.position.x <= 0) {
@@ -57,7 +60,7 @@ define([], function(ctx) {
 
             if (this.position.y <= 0) {
                 this.position.y = 0;
-                this.vitesse.y = -(this.vitesse.y - this.vitesse.y * .2);
+                //this.vitesse.y = -(this.vitesse.y - this.vitesse.y * .2);
             }
 
             //if (this.position.x >= this.screen.width - this.$el.width()) {
@@ -65,14 +68,17 @@ define([], function(ctx) {
             //    this.vitesse.x = -(this.vitesse.x - this.vitesse.x * .2);
             //}
 
-            if (this.position.y >= this.screen.height - this.$el.height()) {
-                this.position.y = this.screen.height - this.$el.height();
-                this.vitesse.y = -(this.vitesse.y - this.vitesse.y * .2);
+//            console.log(this.screen.height)
+            if (this.position.y >= this.screen.innerHeight - this.$el.height()) {
+
+                this.position.y = this.screen.innerHeight - this.$el.height()-2;
+                //this.vitesse.y = -(this.vitesse.y - this.vitesse.y * .2);
 
             }
 
 
             this.render(this.position);
+//            console.log(this.position)
 
 
         },
