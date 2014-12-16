@@ -9,7 +9,7 @@ requirejs.config({
   }
 });
 
-require(['Leap','utils', 'scene', 'perso'], function(Leap, utils, scene, perso) {
+require(['Leap','utils', 'step', 'perso'], function(Leap, utils, step, perso) {
   'use strict';
 
 
@@ -48,7 +48,8 @@ require(['Leap','utils', 'scene', 'perso'], function(Leap, utils, scene, perso) 
 
     $('body').on('click', function(){
         perso.updateSpeed((Math.random() * -10) - 5);
-        console.log('caca')
+        //console.log(perso.vitesse.y);
+
     });
 
 
@@ -126,7 +127,7 @@ require(['Leap','utils', 'scene', 'perso'], function(Leap, utils, scene, perso) 
 
   controller.on('connect', function() {
     console.info('Leap Motion prêt ...');
-    scene.init();
+    step.init();
     perso.init();
   });
 

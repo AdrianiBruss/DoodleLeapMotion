@@ -53,6 +53,8 @@ define([], function(ctx) {
             //this.position.y = this.vitesse.y;
 
 
+            // Collisions avec les murs
+
             //if (this.position.x <= 0) {
             //    this.position.x = 0;
             //    this.vitesse.x = -(this.vitesse.x - this.vitesse.x * .2);
@@ -60,7 +62,7 @@ define([], function(ctx) {
 
             if (this.position.y <= 0) {
                 this.position.y = 0;
-                //this.vitesse.y = -(this.vitesse.y - this.vitesse.y * .2);
+                this.vitesse.y = -(this.vitesse.y - this.vitesse.y * .4);
             }
 
             //if (this.position.x >= this.screen.width - this.$el.width()) {
@@ -77,11 +79,54 @@ define([], function(ctx) {
             }
 
             // Collision avec les marches
-            
+
+            var $marche = $('.step');
+            var marche_posX, marche_posY, marche_width, marche_height, perso_posY;
+
+            for (var k = 0; k < step.number; k++){
+
+                perso_posY = this.position.y;
+
+                //console.log($marche.eq(k));
+
+                marche_posX = $marche.eq(k).position().left;
+                marche_posY = $marche.eq(k).position().top;
+                marche_width = marche_posX + $marche.width();
+                marche_height = marche_posY + $marche.height();
+
+                /*
+                * Detecter une phase de descente
+                * D'une part,
+                * Si la position.y + la hauteur du perso est supérieure à la position.y d'une marche
+                *
+                * Et ensuite
+                *
+                *
+                * Si la position.x du perso est comprise entre la position.x d'une marche et la position d'une marche
+                * plus sa largeur
+                * &&
+                * Si la position.y + sa hauteur du perso est inférieure ou égale à la position y d'une marche,
+                * alors, le personnage s'arrête sur cette marche */
+
+
+                if ( this.vitesse.y > 0  ){
+                    //console.log('descente')
+
+                    if ( (this.position.x + this.$el.width() >= marche_posX
+                        && this.position.x <= marche_width)
+                        && ( (this.position.y + this.$el.height() >= marche_posY)
+                        && (this.position.y + this.$el.height() <= marche_height) )){
+
+                        this.updateSpeed(0);
+                        //console.log('posé')
+
+                    }
+                }
+            }
 
 
             this.render(this.position);
-//            console.log(this.position)
+            //console.log(this.position)
 
 
         },

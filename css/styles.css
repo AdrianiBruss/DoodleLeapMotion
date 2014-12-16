@@ -16,7 +16,7 @@ body #wrapper #perso {
   width: 50px;
   height: 140px;
 }
-body #wrapper .marche {
+body #wrapper .step {
   position: absolute;
   background-color: #005aff;
   width: 150px;
