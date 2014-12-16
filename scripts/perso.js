@@ -34,12 +34,16 @@ define([], function(ctx) {
         },
 
         updateSpeed : function(vitesse){
+            // KeyUp ou Leap.tapKey
             this.vitesse.y = vitesse;
         },
         updateDirection : function(vitesse){
+            // Left/Right ou Leap.Swipe
             this.vitesse.x  = vitesse
         },
         update: function() {
+
+            // Déplacement personnage
 
             this.position.x += this.vitesse.x;
             this.position.y += this.vitesse.y;
@@ -47,39 +51,28 @@ define([], function(ctx) {
             this.vitesse.y += this.step.y;
             this.vitesse.x += this.step.x;
 
-//            this.step.x = this.acceleration;
-            //this.step.y = this.acceleration;
-
-//            this.vitesse.x += this.step.x;
-            //this.vitesse.y += this.step.y;
-
-//            this.position.x -= this.vitesse.x;
-            //this.position.y = this.vitesse.y;
-
-
             // Collisions avec les murs
 
             if (this.position.x <= 0) {
                 this.position.x = 0;
+                // Rebond
                 this.vitesse.x = -(this.vitesse.x - this.vitesse.x * .2);
             }
 
             if (this.position.y <= 0) {
                 this.position.y = 0;
+                // Rebond
                 this.vitesse.y = -(this.vitesse.y - this.vitesse.y * .2);
             }
 
             if (this.position.x >= this.screen.innerWidth - this.$el.width()) {
                 this.position.x = this.screen.innerWidth - this.$el.width();
+                // Rebond
                 this.vitesse.x = -(this.vitesse.x - this.vitesse.x * .2);
             }
 
-//            console.log(this.screen.height)
             if (this.position.y >= this.screen.innerHeight - this.$el.height()) {
-
                 this.position.y = this.screen.innerHeight - this.$el.height()-2;
-                //this.vitesse.y = -(this.vitesse.y - this.vitesse.y * .2);
-
             }
 
             // Collision avec les marches
@@ -98,11 +91,10 @@ define([], function(ctx) {
 
                 /*
                 * Detecter une phase de descente
-                * D'une part,
+                *
                 * Si la position.y + la hauteur du perso est supérieure à la position.y d'une marche
                 *
-                * Et ensuite
-                *
+                * Et
                 *
                 * Si la position.x du perso est comprise entre la position.x d'une marche et la position d'une marche
                 * plus sa largeur
@@ -112,24 +104,23 @@ define([], function(ctx) {
 
 
                 if ( this.vitesse.y > 0  ){
-                    //console.log('descente')
+                    // Descente du personnage
 
                     if ( (this.position.x + this.$el.width() >= marche_posX
                         && this.position.x <= marche_width)
                         && ( (this.position.y + this.$el.height() >= marche_posY)
                         && (this.position.y + this.$el.height() <= marche_height) )){
 
+                        // Perso posé sur une marche
+
                         this.updateSpeed(0);
-                        //console.log('posé')
+
 
                     }
                 }
             }
 
-
             this.render(this.position);
-            //console.log(this.position)
-
 
         },
         render: function (position) {

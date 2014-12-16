@@ -9,34 +9,8 @@ requirejs.config({
   }
 });
 
-require(['Leap','utils', 'step', 'perso', 'keyboard'], function(Leap, utils, step, perso, KeyboardJS) {
-  'use strict';
-
-
-    //test with mouse
-
-    var lastTime = 0;
-    var vendors = ['webkit', 'moz'];
-    for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
-        window.requestAnimationFrame = window[vendors[x]+'RequestAnimationFrame'];
-        window.cancelAnimationFrame =
-            window[vendors[x]+'CancelAnimationFrame'] || window[vendors[x]+'CancelRequestAnimationFrame'];
-    }
-
-    if (!window.requestAnimationFrame)
-        window.requestAnimationFrame = function(callback, element) {
-            var currTime = new Date().getTime();
-            var timeToCall = Math.max(0, 16 - (currTime - lastTime));
-            var id = window.setTimeout(function() { callback(currTime + timeToCall); },
-                timeToCall);
-            lastTime = currTime + timeToCall;
-            return id;
-        };
-
-    if (!window.cancelAnimationFrame)
-        window.cancelAnimationFrame = function(id) {
-            clearTimeout(id);
-        };
+require(['Leap','utils', 'raf', 'step', 'perso', 'keyboard'], function(Leap, utils, raf, step, perso, KeyboardJS) {
+    'use strict';
 
     function anim(){
         requestAnimationFrame(anim);
@@ -44,6 +18,8 @@ require(['Leap','utils', 'step', 'perso', 'keyboard'], function(Leap, utils, ste
     }
 
     requestAnimationFrame(anim);
+
+  /* ---------------------------  KeyBoard ----------------------- */
 
     KeyboardJS.on('up',function(){
 
@@ -69,92 +45,115 @@ require(['Leap','utils', 'step', 'perso', 'keyboard'], function(Leap, utils, ste
       // quand on relache la touche
     });
 
+    /* ---------------------------  Leap Motion ----------------------- */
+    var controller = new Leap.Controller({
+      enableGestures: true,
+      frameEventName: 'animationFrame'
+    });
+
+    controller.connect();
 
 
+    // ====================
+    // CONTROLLER LISTENERS
+    // ====================
 
-  var controller = new Leap.Controller({
-    enableGestures: true,
-    frameEventName: 'animationFrame'
-  });
+    var hand, finger;
 
-  controller.connect();
+    controller.on('frame', function(frame) {
 
+        if(frame.valid && frame.gestures.length > 0){
 
-  // ====================
-  // CONTROLLER LISTENERS
-  // ====================
+            frame.gestures.forEach(function(gesture){
 
-  var hand, finger;
+                switch (gesture.type){
 
-  controller.on('frame', function(frame) {
+                    case "circle":
+                        //console.log("Circle Gesture");
+                        break;
 
+                    case "keyTap":
+                        console.log("Key Tap Gesture");
 
+                        // Essayer de prendre en compte la puissance du tap
+                        perso.updateSpeed((Math.random() * -10) - 5);
 
-    ////effacement du canvas
-    //canvas.context.clearRect(0,0, canvas.el.width, canvas.el.height);
-    //
-    ////Pour chaque main
-    //for(var i = 0; i < frame.hands.length; i++){
-    //
-    //  hand = frame.hands[i];
-    //
-    //  //Dessin de la paume
-    //  var palmPos = utils.LeapToScene(frame, hand.palmPosition);
-    //  canvas.context.fillRect(palmPos.x, palmPos.y, 40,40);
-    //
-    //  //Pour chaque doigt de cette main
-    //  for(var j = 0; j < hand.fingers.length; j++){
-    //
-    //    finger = hand.fingers[j];
-    //
-    //    //Dessin du bout des doigts
-    //    var fingerPos = utils.LeapToScene(frame, finger.tipPosition);
-    //    canvas.context.fillRect(fingerPos.x, fingerPos.y, 10, 10);
-    //
-    //  }
+                        break;
 
-      if(frame.valid && frame.gestures.length > 0){
-        frame.gestures.forEach(function(gesture){
-          switch (gesture.type){
-            case "circle":
-              //console.log("Circle Gesture");
-              break;
-              case "keyTap":
-              console.log("Key Tap Gesture");
+                    case "screenTap":
+                        //console.log("Screen Tap Gesture");
+                        break;
 
-                // Essayer de prendre en compte la puissance du tap
-                perso.updateSpeed((Math.random() * -10) - 5);
+                    case "swipe":
+                        console.log("Swipe Gesture");
 
-              break;
-            case "screenTap":
-              //console.log("Screen Tap Gesture");
-              break;
-            case "swipe":
-              console.log("Swipe Gesture");
-              break;
-          }
-        });
+                        var swipeDirection;
+
+                        //Classify swipe as either horizontal or vertical
+                        var isHorizontal = Math.abs(gesture.direction[0]) > Math.abs(gesture.direction[1]);
+
+                        //Classify as right-left or up-down
+                        if(isHorizontal){
+
+                            if(gesture.direction[0] > 0){
+
+                              swipeDirection = "right";
+                              perso.updateDirection(2);
+
+                            } else {
+
+                              swipeDirection = "left";
+                              perso.updateDirection(-2);
+
+                            }
+
+                        } else { //vertical
+
+                            if(gesture.direction[1] > 0){
+
+                                swipeDirection = "up";
+
+                            } else {
+
+                                swipeDirection = "down";
+
+                            }
+
+                        }
+                        console.log(swipeDirection);
+
+                      break;
+
+                }
+
+          });
+
       }
-
-    //}
 
     perso.update();
 
   });
 
   controller.on('connect', function() {
+
     console.info('Leap Motion prêt ...');
+
+    // init des élements
     step.init();
     perso.init();
+
   });
 
   controller.on('deviceConnected', function() {
+
     console.info('Leap Motion connecté !');
 
   });
 
   controller.on('deviceDisconnected', function() {
+
     console.warn('Leap Motion déconnecté !');
+
   });
 
 });
