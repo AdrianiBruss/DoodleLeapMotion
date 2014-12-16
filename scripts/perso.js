@@ -76,6 +76,9 @@ define([], function(ctx) {
 
             }
 
+            // Collision avec les marches
+            
+
 
             this.render(this.position);
 //            console.log(this.position)
