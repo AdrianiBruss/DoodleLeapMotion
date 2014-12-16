@@ -9,7 +9,7 @@ requirejs.config({
   }
 });
 
-require(['Leap','utils', 'step', 'perso'], function(Leap, utils, step, perso) {
+require(['Leap','utils', 'step', 'perso', 'keyboard'], function(Leap, utils, step, perso, KeyboardJS) {
   'use strict';
 
 
@@ -45,11 +45,28 @@ require(['Leap','utils', 'step', 'perso'], function(Leap, utils, step, perso) {
 
     requestAnimationFrame(anim);
 
+    KeyboardJS.on('up',function(){
 
-    $('body').on('click', function(){
-        perso.updateSpeed((Math.random() * -10) - 5);
-        //console.log(perso.vitesse.y);
+      perso.updateSpeed((Math.random() * -10) - 5);
 
+    }, function(){
+      // quand on relache la touche
+    });
+
+    KeyboardJS.on('left',function(){
+
+      perso.updateDirection(-2);
+
+    }, function(){
+      // quand on relache la touche
+    });
+
+    KeyboardJS.on('right',function(){
+
+      perso.updateDirection(2);
+
+    }, function(){
+      // quand on relache la touche
     });
 
 

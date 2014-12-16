@@ -36,12 +36,16 @@ define([], function(ctx) {
         updateSpeed : function(vitesse){
             this.vitesse.y = vitesse;
         },
+        updateDirection : function(vitesse){
+            this.vitesse.x  = vitesse
+        },
         update: function() {
 
             this.position.x += this.vitesse.x;
             this.position.y += this.vitesse.y;
 
             this.vitesse.y += this.step.y;
+            this.vitesse.x += this.step.x;
 
 //            this.step.x = this.acceleration;
             //this.step.y = this.acceleration;
@@ -55,20 +59,20 @@ define([], function(ctx) {
 
             // Collisions avec les murs
 
-            //if (this.position.x <= 0) {
-            //    this.position.x = 0;
-            //    this.vitesse.x = -(this.vitesse.x - this.vitesse.x * .2);
-            //}
+            if (this.position.x <= 0) {
+                this.position.x = 0;
+                this.vitesse.x = -(this.vitesse.x - this.vitesse.x * .2);
+            }
 
             if (this.position.y <= 0) {
                 this.position.y = 0;
-                this.vitesse.y = -(this.vitesse.y - this.vitesse.y * .4);
+                this.vitesse.y = -(this.vitesse.y - this.vitesse.y * .2);
             }
 
-            //if (this.position.x >= this.screen.width - this.$el.width()) {
-            //    this.position.x = this.screen.width - this.$el.width();
-            //    this.vitesse.x = -(this.vitesse.x - this.vitesse.x * .2);
-            //}
+            if (this.position.x >= this.screen.innerWidth - this.$el.width()) {
+                this.position.x = this.screen.innerWidth - this.$el.width();
+                this.vitesse.x = -(this.vitesse.x - this.vitesse.x * .2);
+            }
 
 //            console.log(this.screen.height)
             if (this.position.y >= this.screen.innerHeight - this.$el.height()) {
@@ -86,8 +90,6 @@ define([], function(ctx) {
             for (var k = 0; k < step.number; k++){
 
                 perso_posY = this.position.y;
-
-                //console.log($marche.eq(k));
 
                 marche_posX = $marche.eq(k).position().left;
                 marche_posY = $marche.eq(k).position().top;

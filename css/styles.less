@@ -2,46 +2,55 @@
     margin:0;
     padding:0;
 }
-body{
+html{
 
-    #wrapper{
+    height: 100%;
+    width: 100%;
 
-        width: 1000px;
-        height: 1182px;
-        margin: 0 auto;
-        background-color: #1f1f1f;
+    body{
 
-        #perso{
+        height: 100%;
+        width: 100%;
 
+        #wrapper{
+
+            height: 100%;
+            width: 100%;
+            margin: 0 auto;
+            background-color: #1f1f1f;
+
+            #perso{
+
+                position: absolute;
+                left: 50%;
+                bottom: 0;
+                border:1px solid #fed72c;
+                width: 50px;
+                height: 140px;
+            }
+
+            .step{
+
+                position: absolute;
+                background-color: #005aff;
+                width: 150px;
+                height: 20px;
+
+            }
+
+        }
+
+        #c {
             position: absolute;
-            left: 50%;
+            top: 0;
+            left: 0;
+            right: 0;
             bottom: 0;
-            border:1px solid #fed72c;
-            width: 50px;
-            height: 140px;
         }
 
-        .step{
 
-            position: absolute;
-            background-color: #005aff;
-            width: 150px;
-            height: 20px;
-//            left: 47%;
-//            top: 500px;
-
-        }
 
     }
-
-    #c {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-    }
-
-
 
 }
+
