@@ -1,10 +1,11 @@
-define([], function(ctx) {
+define([], function() {
 
     return perso = {
 
+
          step : {
             x:0,
-            y:0.2
+            y:0.5
         },
         stepSpeed : {
             x:0,
@@ -15,10 +16,10 @@ define([], function(ctx) {
             y:(Math.random() * -10) - 5
         },
         position : {
-            x: 500,
-            y: 999
+            x: $(window).width() * 0.5,
+            y: $(window).height()
         },
-        screen : window,
+        scene : window,
         $el : $('#perso'),
 
         init: function () {
@@ -65,29 +66,28 @@ define([], function(ctx) {
                 this.vitesse.y = -(this.vitesse.y - this.vitesse.y * .2);
             }
 
-            if (this.position.x >= this.screen.innerWidth - this.$el.width()) {
-                this.position.x = this.screen.innerWidth - this.$el.width();
+            if (this.position.x >= this.scene.innerWidth - this.$el.width()) {
+                this.position.x = this.scene.innerWidth - this.$el.width();
                 // Rebond
                 this.vitesse.x = -(this.vitesse.x - this.vitesse.x * .2);
             }
 
-            if (this.position.y >= this.screen.innerHeight - this.$el.height()) {
-                this.position.y = this.screen.innerHeight - this.$el.height()-2;
+            if (this.position.y >= this.scene.innerHeight - this.$el.height()) {
+                this.position.y = this.scene.innerHeight - this.$el.height()-2;
             }
 
             // Collision avec les marches
 
-            var $marche = $('.step');
             var marche_posX, marche_posY, marche_width, marche_height, perso_posY;
 
-            for (var k = 0; k < step.number; k++){
+            for (var k = 0; k < stepManager.number; k++){
 
                 perso_posY = this.position.y;
 
-                marche_posX = $marche.eq(k).position().left;
-                marche_posY = $marche.eq(k).position().top;
-                marche_width = marche_posX + $marche.width();
-                marche_height = marche_posY + $marche.height();
+                marche_posX = stepManager.list[k].posX;
+                marche_posY = stepManager.list[k].posY;
+                marche_width = marche_posX + stepManager.list[k].width;
+                marche_height = marche_posY + stepManager.list[k].height;
 
                 /*
                 * Detecter une phase de descente
@@ -103,7 +103,7 @@ define([], function(ctx) {
                 * alors, le personnage s'arrête sur cette marche */
 
 
-                if ( this.vitesse.y > 0  ){
+                if ( this.vitesse.y > 0 ){
                     // Descente du personnage
 
                     if ( (this.position.x + this.$el.width() >= marche_posX

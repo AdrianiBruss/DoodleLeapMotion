@@ -14,7 +14,23 @@ require(['Leap','utils', 'raf', 'step', 'perso', 'keyboard'], function(Leap, uti
 
     function anim(){
         requestAnimationFrame(anim);
+
+        // Updates
+
         perso.update();
+
+        for ( var i = 0; i < stepManager.number; i++ ){
+
+          stepManager.list[i].update();
+
+        }
+
+        for ( var i = 0; i < stepManager.number; i++ ){
+
+          stepManager.list[i].render();
+
+        }
+
     }
 
     requestAnimationFrame(anim);
@@ -31,7 +47,7 @@ require(['Leap','utils', 'raf', 'step', 'perso', 'keyboard'], function(Leap, uti
 
     KeyboardJS.on('left',function(){
 
-      perso.updateDirection(-2);
+      perso.updateDirection(-4);
 
     }, function(){
       // quand on relache la touche
@@ -39,7 +55,7 @@ require(['Leap','utils', 'raf', 'step', 'perso', 'keyboard'], function(Leap, uti
 
     KeyboardJS.on('right',function(){
 
-      perso.updateDirection(2);
+      perso.updateDirection(4);
 
     }, function(){
       // quand on relache la touche
@@ -88,6 +104,7 @@ require(['Leap','utils', 'raf', 'step', 'perso', 'keyboard'], function(Leap, uti
                         console.log("Swipe Gesture");
 
                         var swipeDirection;
+                        var velocity = gesture.speed * 0.01;
 
                         //Classify swipe as either horizontal or vertical
                         var isHorizontal = Math.abs(gesture.direction[0]) > Math.abs(gesture.direction[1]);
@@ -98,12 +115,16 @@ require(['Leap','utils', 'raf', 'step', 'perso', 'keyboard'], function(Leap, uti
                             if(gesture.direction[0] > 0){
 
                               swipeDirection = "right";
-                              perso.updateDirection(2);
+                              perso.updateDirection(velocity);
+
+                              console.log(velocity * 0.01);
 
                             } else {
 
                               swipeDirection = "left";
-                              perso.updateDirection(-2);
+                              perso.updateDirection(-velocity);
+
+                              console.log(velocity);
 
                             }
 
@@ -130,8 +151,6 @@ require(['Leap','utils', 'raf', 'step', 'perso', 'keyboard'], function(Leap, uti
 
       }
 
-    perso.update();
-
   });
 
   controller.on('connect', function() {
@@ -139,7 +158,7 @@ require(['Leap','utils', 'raf', 'step', 'perso', 'keyboard'], function(Leap, uti
     console.info('Leap Motion prêt ...');
 
     // init des élements
-    step.init();
+    stepManager.init();
     perso.init();
 
   });
