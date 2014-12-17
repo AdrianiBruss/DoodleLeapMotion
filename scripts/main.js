@@ -101,10 +101,11 @@ require(['Leap','utils', 'raf', 'step', 'perso', 'keyboard'], function(Leap, uti
                         break;
 
                     case "swipe":
-                        console.log("Swipe Gesture");
+                        //console.log("Swipe Gesture");
 
                         var swipeDirection;
-                        var velocity = gesture.speed * 0.01;
+                        var velocity = gesture.speed / 40;
+                        var state = gesture.state;
 
                         //Classify swipe as either horizontal or vertical
                         var isHorizontal = Math.abs(gesture.direction[0]) > Math.abs(gesture.direction[1]);
@@ -114,18 +115,32 @@ require(['Leap','utils', 'raf', 'step', 'perso', 'keyboard'], function(Leap, uti
 
                             if(gesture.direction[0] > 0){
 
-                              swipeDirection = "right";
-                              perso.updateDirection(velocity);
+                                if ( state == "start" ){
 
-                              console.log(velocity * 0.01);
+                                    swipeDirection = "right";
+                                    perso.updateDirection(velocity);
+                                    console.log(velocity);
+
+                                }
+
+                              //console.log(state);
+                              //console.log(velocity);
 
                             } else {
 
-                              swipeDirection = "left";
-                              perso.updateDirection(-velocity);
+                              if ( state == "start" ){
 
-                              console.log(velocity);
+                                swipeDirection = "left";
+                                perso.updateDirection(-velocity);
+                                console.log(velocity);
 
+                              }
+
+                              //swipeDirection = "left";
+                              //perso.updateDirection(-velocity);
+                              //
+                              ////console.log(velocity);
+                              //console.log(state);
                             }
 
                         } else { //vertical
@@ -141,7 +156,7 @@ require(['Leap','utils', 'raf', 'step', 'perso', 'keyboard'], function(Leap, uti
                             }
 
                         }
-                        console.log(swipeDirection);
+                        //console.log(swipeDirection);
 
                       break;
 

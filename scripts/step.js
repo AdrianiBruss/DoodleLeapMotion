@@ -15,10 +15,14 @@ define([], function() {
                     $el     : $('<div class="step"></div>'),
                     width   : 150,
                     height  : 20,
-                    posX    : Math.floor((Math.random() * stepManager.scene.innerWidth) + 1),
+                    posX    : Math.floor((Math.random() * (stepManager.scene.innerWidth - 150))+ 1),
                     posY    : Math.floor((Math.random() * stepManager.scene.innerHeight) + 1),
 
                     update  : function(){
+
+                        //console.log(typeof (this.width));
+                        //console.log(typeof (stepManager.scene.innerWidth - this.width))
+                        //console.log(Math.floor(Math.random() * (stepManager.scene.innerWidth - this.width))+ 1);
 
                         this.posY += 0.7;
 
@@ -42,6 +46,8 @@ define([], function() {
 
 
                 };
+
+                console.log(step.posX);
 
                 step.$el.css({
                     'width' : step.width + 'px',
