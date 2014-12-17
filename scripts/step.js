@@ -2,7 +2,7 @@ define([], function() {
 
     return stepManager = {
 
-        list    :[],
+        list    : [],
         number  : 5,
         scene   : window,
 
@@ -16,20 +16,17 @@ define([], function() {
                     width   : 150,
                     height  : 20,
                     posX    : Math.floor((Math.random() * (stepManager.scene.innerWidth - 150))+ 1),
-                    posY    : Math.floor((Math.random() * stepManager.scene.innerHeight) + 1),
+                    posY    : - stepManager.scene.innerHeight / this.number * i,
 
                     update  : function(){
 
-                        //console.log(typeof (this.width));
-                        //console.log(typeof (stepManager.scene.innerWidth - this.width))
-                        //console.log(Math.floor(Math.random() * (stepManager.scene.innerWidth - this.width))+ 1);
 
-                        this.posY += 0.7;
+                        this.posY += 0.9;
 
                         // Marches en dehors du jeu
                         if (this.posY >= stepManager.scene.innerHeight){
 
-                            this.posY = Math.floor((Math.random() * 600) + 1);
+                            this.posY = 0;
 
                         }
 

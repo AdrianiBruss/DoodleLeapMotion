@@ -9,7 +9,7 @@ requirejs.config({
   }
 });
 
-require(['Leap','utils', 'raf', 'step', 'perso', 'keyboard'], function(Leap, utils, raf, step, perso, KeyboardJS) {
+require(['Leap','game', 'utils', 'raf', 'step', 'perso', 'keyboard'], function(Leap, game, utils, raf, step, perso, KeyboardJS) {
     'use strict';
 
     function anim(){
@@ -35,11 +35,18 @@ require(['Leap','utils', 'raf', 'step', 'perso', 'keyboard'], function(Leap, uti
 
     requestAnimationFrame(anim);
 
+
   /* ---------------------------  KeyBoard ----------------------- */
 
     KeyboardJS.on('up',function(){
 
-      perso.updateSpeed((Math.random() * -10) - 5);
+        if (perso.jump < 3){
+
+          perso.updateSpeed(-10);
+          perso.jump += 1;
+
+        }
+
 
     }, function(){
       // quand on relache la touche
@@ -92,7 +99,12 @@ require(['Leap','utils', 'raf', 'step', 'perso', 'keyboard'], function(Leap, uti
                         console.log("Key Tap Gesture");
 
                         // Essayer de prendre en compte la puissance du tap
-                        perso.updateSpeed((Math.random() * -10) - 5);
+                        if (perso.jump < 3){
+
+                          perso.updateSpeed(-10);
+                          perso.jump += 1;
+
+                        }
 
                         break;
 

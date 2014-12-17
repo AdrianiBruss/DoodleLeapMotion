@@ -13,12 +13,13 @@ define([], function() {
         },
         vitesse : {
             x:0,
-            y:(Math.random() * -10) - 5
+            y:0
         },
         position : {
             x: $(window).width() * 0.5,
-            y: $(window).height()
+            y: $(window).height() - $('#perso').height() - 22
         },
+        jump:0,
         scene : window,
         $el : $('#perso'),
 
@@ -114,6 +115,7 @@ define([], function() {
                         // Perso posé sur une marche
 
                         this.updateSpeed(0);
+                        this.jump = 0;
 
 
                     }
