@@ -14,7 +14,11 @@ html body #wrapper {
   height: 100%;
   width: 100%;
   margin: 0 auto;
-  background-color: #1f1f1f;
+  background: url('../img/background4.png');
+}
+html body #wrapper #score {
+  font-size: 30px;
+  color: #fff;
 }
 html body #wrapper #perso {
   position: absolute;

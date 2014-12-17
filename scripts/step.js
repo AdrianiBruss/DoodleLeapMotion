@@ -2,9 +2,13 @@ define([], function() {
 
     return stepManager = {
 
-        list    : [],
-        number  : 5,
-        scene   : window,
+        list            : [],
+        number          : 5,
+        scene           : window,
+        firstStep       : {
+
+            $el : $('#first-step')
+        },
 
         init: function(){
 

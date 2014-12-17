@@ -17,7 +17,9 @@ require(['Leap','game', 'utils', 'raf', 'step', 'perso', 'keyboard'], function(L
 
         // Updates
 
+        game.update();
         perso.update();
+
 
         for ( var i = 0; i < stepManager.number; i++ ){
 
@@ -33,19 +35,29 @@ require(['Leap','game', 'utils', 'raf', 'step', 'perso', 'keyboard'], function(L
 
     }
 
-    requestAnimationFrame(anim);
-
 
   /* ---------------------------  KeyBoard ----------------------- */
 
     KeyboardJS.on('up',function(){
 
-        if (perso.jump < 3){
 
-          perso.updateSpeed(-10);
-          perso.jump += 1;
+        if ( game.start == true ){
+
+            if (perso.jump < 3){
+
+                perso.updateSpeed(-10);
+                perso.jump += 1;
+
+            }
+
+        }else{
+
+            game.start = true;
+            requestAnimationFrame(anim);
 
         }
+
+
 
 
     }, function(){
@@ -184,9 +196,10 @@ require(['Leap','game', 'utils', 'raf', 'step', 'perso', 'keyboard'], function(L
 
     console.info('Leap Motion prêt ...');
 
-    // init des élements
-    stepManager.init();
-    perso.init();
+        // init des élements
+        game.init();
+        stepManager.init();
+        perso.init();
 
   });
 

@@ -2,8 +2,7 @@ define([], function() {
 
     return perso = {
 
-
-         step : {
+        step : {
             x:0,
             y:0.5
         },
@@ -20,6 +19,7 @@ define([], function() {
             y: $(window).height() - $('#perso').height() - 22
         },
         jump:0,
+        onStep: false,
         scene : window,
         $el : $('#perso'),
 
@@ -55,16 +55,11 @@ define([], function() {
 
             // Collisions avec les murs
 
+            // position.x
             if (this.position.x <= 0) {
                 this.position.x = 0;
                 // Rebond
                 this.vitesse.x = -(this.vitesse.x - this.vitesse.x * .2);
-            }
-
-            if (this.position.y <= 0) {
-                this.position.y = 0;
-                // Rebond
-                this.vitesse.y = -(this.vitesse.y - this.vitesse.y * .2);
             }
 
             if (this.position.x >= this.scene.innerWidth - this.$el.width()) {
@@ -72,6 +67,15 @@ define([], function() {
                 // Rebond
                 this.vitesse.x = -(this.vitesse.x - this.vitesse.x * .2);
             }
+
+            // position.y
+
+            if (this.position.y <= 0) {
+                this.position.y = 0;
+                // Rebond
+                this.vitesse.y = -(this.vitesse.y - this.vitesse.y * .2);
+            }
+
 
             if (this.position.y >= this.scene.innerHeight - this.$el.height()) {
                 this.position.y = this.scene.innerHeight - this.$el.height()-2;
@@ -114,9 +118,27 @@ define([], function() {
 
                         // Perso posé sur une marche
 
+                        this.onStep = true;
                         this.updateSpeed(0);
                         this.jump = 0;
 
+                        if ( this.onStep == true){
+                            game.score += 10;
+                        }
+                    }
+                }else{
+
+                    // Saut du personnage
+
+                    // Collision de la tête du personnage avec le bas d'une marche
+
+                    if ( (this.position.x + this.$el.width() >= marche_posX
+                        && this.position.x <= marche_width)
+                        && ( (this.position.y >= marche_posY)
+                        && (this.position.y <= marche_height) )){
+
+                        // Collision
+                        this.vitesse.y = -(this.vitesse.y - this.vitesse.y * .2);
 
                     }
                 }
