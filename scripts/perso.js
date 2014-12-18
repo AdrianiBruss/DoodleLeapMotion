@@ -32,7 +32,7 @@ define([], function() {
 
             this.$el.css({
                 'top'                   : this.position.y + 'px',
-                'left'                  : this.position.x + 'px',
+                'left'                  : this.position.x + 'px'
             });
 
         },

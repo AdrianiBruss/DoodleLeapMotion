@@ -27,9 +27,9 @@ require(['Leap','game', 'utils', 'raf', 'step', 'perso', 'keyboard'], function(L
 
         }
 
-        for ( var i = 0; i < stepManager.number; i++ ){
+        for ( var j = 0; j < stepManager.number; j++ ){
 
-          stepManager.list[i].render();
+          stepManager.list[j].render();
 
         }
 
@@ -65,7 +65,7 @@ require(['Leap','game', 'utils', 'raf', 'step', 'perso', 'keyboard'], function(L
                 'left'                      : '-20%'
 
             });
-          
+
 
 
         }
