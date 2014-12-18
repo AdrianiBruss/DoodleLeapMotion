@@ -20,6 +20,7 @@ define([], function() {
         },
         jump:0,
         onStep: false,
+        alreadyScored:false,
         scene : window,
         $el : $('#perso'),
 
@@ -107,10 +108,10 @@ define([], function() {
                 * Si la position.y + sa hauteur du perso est inférieure ou égale à la position y d'une marche,
                 * alors, le personnage s'arrête sur cette marche */
 
-
+                console.log(this.alreadyScored)
                 if ( this.vitesse.y > 0 ){
                     // Descente du personnage
-
+                    this.onStep=false;
                     if ( (this.position.x + this.$el.width() >= marche_posX
                         && this.position.x <= marche_width)
                         && ( (this.position.y + this.$el.height() >= marche_posY)
@@ -122,12 +123,16 @@ define([], function() {
                         this.updateSpeed(0);
                         this.jump = 0;
 
-                        if ( this.onStep == true){
+                        if ( this.onStep == true && this.alreadyScored==false){
                             game.score += 10;
+                            this.alreadyScored=true;
+
                         }
                     }
                 }else{
-
+                    if(!this.onStep){
+                        this.alreadyScored=false;
+                    }
                     // Saut du personnage
 
                     // Collision de la tête du personnage avec le bas d'une marche
