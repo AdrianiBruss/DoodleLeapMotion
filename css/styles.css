@@ -48,7 +48,6 @@ html body #wrapper #drapeau {
   left: 50%;
   transition: all 1s linear;
   -webkit-transition: all 1s linear;
-  border: 1px solid red;
 }
 html body #wrapper #first-step {
   position: absolute;
