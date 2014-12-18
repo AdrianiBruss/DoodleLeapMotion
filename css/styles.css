@@ -42,13 +42,21 @@ html body #wrapper #perso {
 html body #wrapper #first-step {
   position: absolute;
   bottom: 0;
-  background-color: #005aff;
-  width: 100%;
+  left: 49%;
+  background-color: #fff;
+  width: 100px;
   height: 20px;
+}
+html body #wrapper #first-step #drapeau {
+  width: 150px;
+  height: 250px;
+  background: url('../img/drapeau.png') no-repeat;
+  position: absolute;
+  bottom: 13px;
 }
 html body #wrapper .step {
   position: absolute;
-  background-color: #005aff;
+  background-color: rgba(255, 255, 255, 0.7);
   width: 150px;
   height: 20px;
 }
