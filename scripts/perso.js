@@ -108,7 +108,6 @@ define([], function() {
                 * Si la position.y + sa hauteur du perso est inférieure ou égale à la position y d'une marche,
                 * alors, le personnage s'arrête sur cette marche */
 
-                console.log(this.alreadyScored)
                 if ( this.vitesse.y > 0 ){
                     // Descente du personnage
                     this.onStep=false;
@@ -119,13 +118,13 @@ define([], function() {
 
                         // Perso posé sur une marche
 
-                        this.onStep = true;
                         this.updateSpeed(0);
+                        this.onStep = true;
                         this.jump = 0;
 
                         if ( this.onStep == true && this.alreadyScored==false){
-                            game.score += 10;
                             this.alreadyScored=true;
+                            game.score += 10;
 
                         }
                     }
