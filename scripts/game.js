@@ -23,8 +23,8 @@ define([], function() {
 
         update          :   function(){
 
-            this.backgroundY += 0.35;
-            this.backgroundY_O += 0.2;
+            this.backgroundY    += 0.35;
+            this.backgroundY_O  += 0.2;
 
 
             this.render();

@@ -53,6 +53,8 @@ html body #wrapper #first-step #drapeau {
   background: url('../img/drapeau.png') no-repeat;
   position: absolute;
   bottom: 13px;
+  transition: All 1s ease;
+  -webkit-transition: All 1s ease;
 }
 html body #wrapper .step {
   position: absolute;

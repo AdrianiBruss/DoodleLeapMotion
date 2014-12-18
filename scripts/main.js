@@ -54,12 +54,14 @@ require(['Leap','game', 'utils', 'raf', 'step', 'perso', 'keyboard'], function(L
 
             game.start = true;
             requestAnimationFrame(anim);
-          console.log(game.overlay);
-            game.overlay.css({
+            console.log(game.overlay);
+            $('#drapeau').css({
 
-                '-ms-transform'       : 'rotate(7deg)',
-                '-webkit-transform'   : 'rotate(7deg)',
-                'transform'           : 'rotate(7deg)'
+                'transform'           : 'rotate(-116deg)',
+                '-webkit-transform'   : 'rotate(-116deg)',
+                '-moz-transform'      : 'rotate(-116deg)',
+                '-o-transform'        : 'rotate(-116deg)',
+                '-ms-transform'       : 'rotate(-116deg)'
 
             })
 
