@@ -125,11 +125,32 @@ require(['Leap','game', 'utils', 'raf', 'step', 'perso', 'keyboard'], function(L
                     case "keyTap":
                         console.log("Key Tap Gesture");
 
-                        // Essayer de prendre en compte la puissance du tap
-                        if (perso.jump < 3){
+                        if ( game.start == true ){
 
-                          perso.updateSpeed(-10);
-                          perso.jump += 1;
+                            if (perso.jump < 3){
+
+                              perso.updateSpeed(-10);
+                              perso.jump += 1;
+
+                            }
+
+                        }else{
+
+                            game.start = true;
+                            requestAnimationFrame(anim);
+
+                            // Disparition du drapeau
+                            $('#drapeau').css({
+
+                              'transform'                 : 'rotate(-720deg)',
+                              '-webkit-transform'         : 'rotate(-720deg)',
+                              '-webkit-transform-origin'  : 'bottom left',
+                              'transform-origin'          : 'bottom left',
+                              'left'                      : '-20%'
+
+                            });
+
+
 
                         }
 
