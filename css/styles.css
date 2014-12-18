@@ -33,9 +33,11 @@ html body #wrapper #perso {
   position: absolute;
   left: 50%;
   bottom: 0;
-  border: 1px solid #fed72c;
   width: 50px;
   height: 140px;
+  background-image: url('../img/perso.png');
+  background-size: cover;
+  background-position-x: 50%;
 }
 html body #wrapper #first-step {
   position: absolute;

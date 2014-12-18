@@ -68,6 +68,8 @@ require(['Leap','game', 'utils', 'raf', 'step', 'perso', 'keyboard'], function(L
 
       perso.updateDirection(-4);
 
+
+
     }, function(){
       // quand on relache la touche
     });
