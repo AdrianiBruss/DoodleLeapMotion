@@ -13,8 +13,15 @@ require(['Leap','game', 'utils', 'raf', 'step', 'perso', 'keyboard'], function(L
     'use strict';
 
     function anim(){
+       if(!perso.fallen){
         requestAnimationFrame(anim);
-
+       }else{
+          perso.fallen=false;
+          game.init();
+          stepManager.init();
+          perso.init();
+       }
+        console.log('anim')
         // Updates
 
         game.update();
@@ -33,10 +40,19 @@ require(['Leap','game', 'utils', 'raf', 'step', 'perso', 'keyboard'], function(L
 
         }
 
+        if(perso.fallen){
+         
+          cancelAnimationFrame(anim);
+          // game.init();
+          // stepManager.init();
+          // perso.init();
+          return;
+        }
+
     }
 
-    var mySound = new buzz.sound( "/song/boum", {
-        formats: [ "ogg", "mp3", "aac" ]
+    var mySound = new buzz.sound( "song/boum", {
+        formats: [ "mp3", "aac" ]
     });
 
 
@@ -46,12 +62,13 @@ require(['Leap','game', 'utils', 'raf', 'step', 'perso', 'keyboard'], function(L
 
     KeyboardJS.on('up',function(){
 
-        mySound.play();
+       
+        console.log(mySound);
 
         if ( game.start == true ){
 
             if (perso.jump < 3){
-
+                mySound.play();
                 perso.updateSpeed(-10);
                 perso.jump += 1;
 

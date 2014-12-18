@@ -23,10 +23,16 @@ define([], function() {
         alreadyScored:false,
         steppedOn:0,
         scene : window,
+        fallen : false,
         $el : $('#perso'),
 
         init: function () {
-
+            this.position.x =$(window).width() * 0.5;
+            this.position.y =$(window).height() - $('#perso').height() - 22
+            this.jump=0;
+            this.alreadyScored=false;
+            this.steppedOn=0;
+            this.fallen=false;
             console.log('perso inited');
 
 
@@ -72,16 +78,27 @@ define([], function() {
 
             // position.y
 
-            if (this.position.y <= 0) {
+            /*if (this.position.y <= 0) {
                 this.position.y = 0;
                 // Rebond
                 this.vitesse.y = -(this.vitesse.y - this.vitesse.y * .2);
-            }
+            }*/
 
 
             if (this.position.y >= this.scene.innerHeight - this.$el.height()) {
-                this.position.y = this.scene.innerHeight - this.$el.height()-2;
+                if(this.steppedOn==0){
+                    this.position.y = this.scene.innerHeight - this.$el.height()-2;  
+                }
             }
+            if(this.position.y >= this.scene.innerHeight){
+                this.fallen=true;
+               /* cancelAnimationFrame(anim);
+
+                game.init();
+                stepManager.init();
+                perso.init();*/
+            }
+
 
             // Collision avec les marches
 

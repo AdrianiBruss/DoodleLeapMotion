@@ -11,7 +11,13 @@ define([], function() {
         },
 
         init: function(){
-
+            this.list=[];
+            if($('.step')){
+                this.firstStep.$el.show();
+                $('.step').each(function(){
+                    $(this).remove();
+                })
+            }
             for(var i = 0; i < this.number; i++){
 
                 var step = {
@@ -20,7 +26,7 @@ define([], function() {
                     width   : stepManager.scene.innerWidth * 0.2,
                     height  : 20,
                     posX    : Math.floor((Math.random() * (stepManager.scene.innerWidth - 300))+ 1),
-                    posY    : - ((stepManager.scene.innerHeight + 150)/ this.number * i),
+                    posY    : - ((stepManager.scene.innerHeight + 150)/ this.number * i) + stepManager.scene.innerHeight*.3,
                     ratios  : {
                     "10" : 0.175, 
                     "20" : 0.150, 
@@ -67,7 +73,7 @@ define([], function() {
 
                 };
 
-                console.log(step.posX);
+                // console.log(step.posX);
 
                 step.$el.css({
                     'width' : step.width + 'px',

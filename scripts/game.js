@@ -10,7 +10,10 @@ define([], function() {
         backgroundY_O   :   0,
         backgroundY     :   0,
         init            :   function(){
-
+            this.start=false;
+            this.score=0;
+            this.backgroundY_O  =   0;
+            this.backgroundY    =   0;
             this.score_el.html(this.score);
             this.scene.css({
                 'background-position-y': this.backgroundY + 'px'
@@ -18,6 +21,11 @@ define([], function() {
             this.overlay.css({
                 'background-position-y': this.backgroundY_O + 'px'
             })
+            $('#drapeau').css({
+                left: '50%',
+                'transform'                 : 'none',
+                '-webkit-transform'         : 'none',
+            });
 
         },
 
@@ -40,7 +48,7 @@ define([], function() {
                 'background-position-y': this.backgroundY_O + 'px'
             });
 
-        }
+        },
 
     }
 
