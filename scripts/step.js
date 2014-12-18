@@ -17,15 +17,15 @@ define([], function() {
                 var step = {
 
                     $el     : $('<div class="step"></div>'),
-                    width   : stepManager.scene.innerWidth * 0.1,
+                    width   : stepManager.scene.innerWidth * 0.2,
                     height  : 20,
                     posX    : Math.floor((Math.random() * (stepManager.scene.innerWidth - 300))+ 1),
-                    posY    : - stepManager.scene.innerHeight / this.number * i,
+                    posY    : - ((stepManager.scene.innerHeight + 150)/ this.number * i),
                     ratios  : {
-                    "10" : 0.095, 
-                    "20" : 0.085, 
-                    "30" : 0.080, 
-                    "40" : 0.075
+                    "10" : 0.175, 
+                    "20" : 0.150, 
+                    "30" : 0.125, 
+                    "40" : 0.1
                     },
                     stepSpeed: 0.9,
                     stepSpeedArray: {
