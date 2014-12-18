@@ -21,6 +21,7 @@ define([], function() {
         jump:0,
         onStep: false,
         alreadyScored:false,
+        steppedOn:0,
         scene : window,
         $el : $('#perso'),
 
@@ -125,7 +126,7 @@ define([], function() {
                         if ( this.onStep == true && this.alreadyScored==false){
                             this.alreadyScored=true;
                             game.score += 10;
-
+                            this.steppedOn+=1;
                         }
                     }
                 }else{

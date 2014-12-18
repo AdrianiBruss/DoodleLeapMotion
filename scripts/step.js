@@ -21,17 +21,35 @@ define([], function() {
                     height  : 20,
                     posX    : Math.floor((Math.random() * (stepManager.scene.innerWidth - 300))+ 1),
                     posY    : - stepManager.scene.innerHeight / this.number * i,
-
+                    ratios  : {
+                    "10" : 0.095, 
+                    "20" : 0.085, 
+                    "30" : 0.080, 
+                    "40" : 0.075
+                    },
+                    stepSpeed: 0.9,
+                    stepSpeedArray: {
+                    "10" : 1, 
+                    "20" : 1.1, 
+                    "30" : 1.2, 
+                    "40" : 1.3
+                    },
                     update  : function(){
 
 
-                        this.posY += 0.9;
+                        this.posY += this.stepSpeed;
 
                         // Marches en dehors du jeu
                         if (this.posY >= stepManager.scene.innerHeight){
 
                             this.posY = 0;
 
+                        }
+                        for(var key in this.ratios){
+                            if(parseInt(key)==perso.steppedOn){
+                                this.width = stepManager.scene.innerWidth * this.ratios[key];
+                                this.stepSpeed = this.stepSpeedArray[key];
+                            }
                         }
 
                     },
@@ -40,7 +58,8 @@ define([], function() {
 
                         this.$el.css({
                             'top'   : this.posY + 'px',
-                            'left'  : this.posX + 'px'
+                            'left'  : this.posX + 'px',
+                            'width' : this.width + 'px'
                         })
 
                     }
