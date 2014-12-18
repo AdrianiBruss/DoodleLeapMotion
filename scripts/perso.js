@@ -128,6 +128,9 @@ define([], function() {
                             game.score += 10;
                             this.steppedOn+=1;
                         }
+                        if(this.steppedOn==1){
+                            $('#first-step').fadeOut();
+                        }
                     }
                 }else{
                     if(!this.onStep){
