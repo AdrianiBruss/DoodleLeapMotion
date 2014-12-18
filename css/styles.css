@@ -14,11 +14,20 @@ html body #wrapper {
   height: 100%;
   width: 100%;
   margin: 0 auto;
-  background: url('../img/background4.png');
+  background: url('../img/background-body.jpg');
+}
+html body #wrapper #overlay {
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
+  background: url('../img/background-overlay.png');
 }
 html body #wrapper #score {
   font-size: 30px;
   color: #fff;
+  position: absolute;
+  top: 10px;
+  left: 10px;
 }
 html body #wrapper #perso {
   position: absolute;

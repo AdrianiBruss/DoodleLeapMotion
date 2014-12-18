@@ -17,7 +17,7 @@ define([], function() {
                 var step = {
 
                     $el     : $('<div class="step"></div>'),
-                    width   : 150,
+                    width   : stepManager.scene.innerWidth * 0.2,
                     height  : 20,
                     posX    : Math.floor((Math.random() * (stepManager.scene.innerWidth - 150))+ 1),
                     posY    : - stepManager.scene.innerHeight / this.number * i,
