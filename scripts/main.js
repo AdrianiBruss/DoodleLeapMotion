@@ -35,11 +35,18 @@ require(['Leap','game', 'utils', 'raf', 'step', 'perso', 'keyboard'], function(L
 
     }
 
+    var mySound = new buzz.sound( "/song/boum", {
+        formats: [ "ogg", "mp3", "aac" ]
+    });
+
+
+
 
   /* ---------------------------  KeyBoard ----------------------- */
 
     KeyboardJS.on('up',function(){
 
+        mySound.play();
 
         if ( game.start == true ){
 
@@ -101,6 +108,8 @@ require(['Leap','game', 'utils', 'raf', 'step', 'perso', 'keyboard'], function(L
       frameEventName: 'animationFrame'
     });
 
+
+
     controller.connect();
 
 
@@ -124,6 +133,8 @@ require(['Leap','game', 'utils', 'raf', 'step', 'perso', 'keyboard'], function(L
 
                     case "keyTap":
                         console.log("Key Tap Gesture");
+
+                        $('#boum').play();
 
                         if ( game.start == true ){
 
