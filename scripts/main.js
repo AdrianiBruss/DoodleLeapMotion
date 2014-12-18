@@ -54,16 +54,19 @@ require(['Leap','game', 'utils', 'raf', 'step', 'perso', 'keyboard'], function(L
 
             game.start = true;
             requestAnimationFrame(anim);
-            console.log(game.overlay);
+
+            // Disparition du drapeau
             $('#drapeau').css({
 
-                'transform'           : 'rotate(-116deg)',
-                '-webkit-transform'   : 'rotate(-116deg)',
-                '-moz-transform'      : 'rotate(-116deg)',
-                '-o-transform'        : 'rotate(-116deg)',
-                '-ms-transform'       : 'rotate(-116deg)'
+                'transform'                 : 'rotate(-720deg)',
+                '-webkit-transform'         : 'rotate(-720deg)',
+                '-webkit-transform-origin'  : 'bottom left',
+                'transform-origin'          : 'bottom left',
+                'left'                      : '-20%'
 
-            })
+            });
+          
+
 
         }
 

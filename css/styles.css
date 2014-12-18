@@ -39,6 +39,17 @@ html body #wrapper #perso {
   background-size: cover;
   background-position-x: 50%;
 }
+html body #wrapper #drapeau {
+  width: 150px;
+  height: 250px;
+  background: url('../img/drapeau.png') no-repeat;
+  position: absolute;
+  bottom: 13px;
+  left: 50%;
+  transition: all 1s linear;
+  -webkit-transition: all 1s linear;
+  border: 1px solid red;
+}
 html body #wrapper #first-step {
   position: absolute;
   bottom: 0;
@@ -46,15 +57,6 @@ html body #wrapper #first-step {
   background-color: #fff;
   width: 100px;
   height: 20px;
-}
-html body #wrapper #first-step #drapeau {
-  width: 150px;
-  height: 250px;
-  background: url('../img/drapeau.png') no-repeat;
-  position: absolute;
-  bottom: 13px;
-  transition: All 1s ease;
-  -webkit-transition: All 1s ease;
 }
 html body #wrapper .step {
   position: absolute;
