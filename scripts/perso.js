@@ -77,12 +77,11 @@ define([], function() {
             }
 
             // position.y
-
-            /*if (this.position.y <= 0) {
+            if (this.position.y <= 0) {
                 this.position.y = 0;
                 // Rebond
                 this.vitesse.y = -(this.vitesse.y - this.vitesse.y * .2);
-            }*/
+            }
 
 
             if (this.position.y >= this.scene.innerHeight - this.$el.height()) {

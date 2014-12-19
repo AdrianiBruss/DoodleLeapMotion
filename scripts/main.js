@@ -26,7 +26,7 @@ require(['Leap','game', 'utils', 'raf', 'step', 'perso', 'keyboard'], function(L
           perso.init();
 
        }
-        console.log('anim');
+        //console.log('anim');
         // Updates
 
         game.update();
@@ -68,7 +68,7 @@ require(['Leap','game', 'utils', 'raf', 'step', 'perso', 'keyboard'], function(L
     KeyboardJS.on('up',function(){
 
        
-        console.log(mySound);
+        //console.log(mySound);
 
         if ( game.start == true ){
 
@@ -151,7 +151,7 @@ require(['Leap','game', 'utils', 'raf', 'step', 'perso', 'keyboard'], function(L
                     case "keyTap":
                         console.log("Key Tap Gesture");
 
-                        $('#boum').play();
+                        //$('#boum').play();
 
                         if ( game.start == true ){
 
