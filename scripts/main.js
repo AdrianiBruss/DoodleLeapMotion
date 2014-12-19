@@ -13,15 +13,20 @@ require(['Leap','game', 'utils', 'raf', 'step', 'perso', 'keyboard'], function(L
     'use strict';
 
     function anim(){
+
        if(!perso.fallen){
+
         requestAnimationFrame(anim);
+
        }else{
+
           perso.fallen=false;
           game.init();
           stepManager.init();
           perso.init();
+
        }
-        console.log('anim')
+        console.log('anim');
         // Updates
 
         game.update();
@@ -90,12 +95,7 @@ require(['Leap','game', 'utils', 'raf', 'step', 'perso', 'keyboard'], function(L
 
             });
 
-
-
         }
-
-
-
 
     }, function(){
       // quand on relache la touche

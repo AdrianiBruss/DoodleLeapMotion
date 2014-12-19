@@ -16,7 +16,7 @@ define([], function() {
         },
         position : {
             x: $(window).width() * 0.5,
-            y: $(window).height() - $('#perso').height() - 22
+            y: $(window).height() - $('#perso').height()
         },
         jump:0,
         onStep: false,
@@ -27,12 +27,12 @@ define([], function() {
         $el : $('#perso'),
 
         init: function () {
-            this.position.x =$(window).width() * 0.5;
-            this.position.y =$(window).height() - $('#perso').height() - 22
-            this.jump=0;
-            this.alreadyScored=false;
-            this.steppedOn=0;
-            this.fallen=false;
+            this.position.x = $(window).width() * 0.5;
+            this.position.y = $(window).height() - $('#perso').height()
+            this.jump = 0;
+            this.alreadyScored = false;
+            this.steppedOn = 0;
+            this.fallen = false;
             console.log('perso inited');
 
 

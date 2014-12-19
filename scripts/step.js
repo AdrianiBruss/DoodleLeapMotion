@@ -11,7 +11,8 @@ define([], function() {
         },
 
         init: function(){
-            this.list=[];
+
+            this.list = [];
             if($('.step')){
                 this.firstStep.$el.show();
                 $('.step').each(function(){
@@ -28,17 +29,17 @@ define([], function() {
                     posX    : Math.floor((Math.random() * (stepManager.scene.innerWidth - 300))+ 1),
                     posY    : - ((stepManager.scene.innerHeight + 150)/ this.number * i) + stepManager.scene.innerHeight*.3,
                     ratios  : {
-                    "10" : 0.175, 
-                    "20" : 0.150, 
-                    "30" : 0.125, 
-                    "40" : 0.1
+                        "10" : 0.175,
+                        "20" : 0.150,
+                        "30" : 0.125,
+                        "40" : 0.1
                     },
                     stepSpeed: 0.9,
                     stepSpeedArray: {
-                    "10" : 1, 
-                    "20" : 1.1, 
-                    "30" : 1.2, 
-                    "40" : 1.3
+                        "10" : 1,
+                        "20" : 1.1,
+                        "30" : 1.2,
+                        "40" : 1.3
                     },
                     update  : function(){
 
